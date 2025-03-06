@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    let columns = Array(repeating:GridItem(.flexible(), spacing:10), count:4)
     
+    let columns = Array(repeating:GridItem(.flexible()), count:4)
+    let rows = Array(repeating:GridItem(.fixed(100)), count:3)
+    /*
     var body: some View {
         ScrollView{
             LazyVGrid(columns: columns, pinnedViews: .sectionHeaders){
@@ -34,6 +36,19 @@ struct ContentView: View {
                     Text("Not Favorites")
                         .font(.largeTitle.bold())
                         .frame(maxWidth: .infinity, alignment: .leading)
+                }
+            }
+            .padding()
+        }
+    }*/
+    
+    var body: some View {
+        ScrollView(.horizontal){
+            LazyHGrid(rows: rows){
+                ForEach(MockData.colors, id: \.self) {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill($0.gradient)
+                        .frame(width: 100)
                 }
             }
             .padding()
